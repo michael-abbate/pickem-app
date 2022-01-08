@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    <center><h1 class = 'page_title'>Pick'em! Locks only!</h1></center>
+{% endblock %}
+
+{% block body %}
+    Hello world!
+    
+    <div class='dropzone'>
+        <table class='droptable'>
+            <tr>
+                <td class='matchup-cell'>Favorite</td>
+                <td class='drophere'>DROP HERE</td>
+            </tr>
+            <tr>
+                <td class='matchup-cell'>Underdog</td>
+                <td class='drophere'>DROP HERE</td>
+            </tr>
+            <tr>
+                <td class='matchup-cell'>Over</td>
+                <td id = 'drophere-over' class='drophere' ondrop="drop(event,this.id)" ondragover="allowDrop(event)">OVER</td>
+            </tr>
+            <tr>
+                <td class='matchup-cell'>Under</td>
+                <td class='drophere'>DROP HERE</td>
+            </tr>
+            <tr>
+                <td class='matchup-cell'>Mortal Lock</td>
+                <td class='drophere'>DROP HERE</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <form method='post' id='pickem-form-1' action="/success">
+            <button type='submit'>Submit Picks</button>
+        <table class='pickem-table'>
+            <!-- {% for col in columns %}
+            <th>{{ col }}</th>
+            {% endfor %} -->
+            {% for day in unique_days %}
+                <td style='padding-top:1em;'><b>{{ day }}</b></td>
+                {% for i,row in records[records.date == day].iterrows() %}
+                    <tr>
+                        <td class='time-cell'>{{ row.time }}</td>
+                        <td>
+                            <table class = 'nested-pickem-table'>
+                                <tr class='away-row'>
+                                    <td class = 'matchup-cell'>{{ row.team1_name }}</td>
+                                    {% if "NOT FOUND" in row.spread %}
+                                        <td class = 'pickem-cell'>N/A</td>
+                                    {% elif "-" not in row.spread %}
+                                        <td class = 'pickem-cell'>-{{ row.spread }}</td>
+                                    {% else %}
+                                        <td class = 'pickem-cell'>{{ row.spread | replace("-", "+") }}</td>
+                                    {% endif %}
+                                    {% if "NOT FOUND" in row["O/U"] %}
+                                        <td class = 'pickem-cell'>N/A</td>
+                                    {% else %}
+                                    <td id = "{{ row.game_id }}-over">
+                                        <label class = 'pickem-cell-label' id = "label-{{ row.game_id }}-over">
+                                            <input style = "display:none;" type="checkbox" onclick = "changeBackground('{{ row.game_id }}-over')" name="{{ row.game_id }}-over" id="input-{{ row.game_id }}-over" value="{{ row['O/U'] }}" />
+                                            o{{ row["O/U"] }}
+                                        </label>
+                                    </td>
+                                    {% endif %}
+                                </tr>
+                                <tr class='home-row'>
+                                    <td class = 'matchup-cell'>{{ row.team2_name }}</td>
+                                    {% if "NOT FOUND" in row.spread %}
+                                        <td class = 'pickem-cell'>N/A</td>
+                                    {% elif "-" in row.spread %}
+                                        <td class = 'pickem-cell'>{{ row.spread }}</td>  
+                                    {% else %}  
+                                        <td class = 'pickem-cell'>+{{ row.spread }}</td>
+                                    {% endif %}
+                                    {% if "NOT FOUND" in row["O/U"] %}
+                                        <td class = 'pickem-cell'>N/A</td>
+                                    {% else %}
+                                        <td class = 'pickem-cell'>u{{ row["O/U"] }}</td>
+                                    {% endif %}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}            
+        </table>
+    </form>
+    </div>
+
+{% endblock %}

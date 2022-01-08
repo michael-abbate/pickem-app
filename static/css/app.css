@@ -1,0 +1,14 @@
+pre{background:#f5f5f5;color:#666;font-family:monospace;font-size:14px;margin:20px 0;overflow:auto;padding:20px;white-space:pre;white-space:pre-wrap;word-wrap:break-word}::-webkit-input-placeholder{color:#c7c7c7}::-moz-placeholder{color:#c7c7c7}:-ms-input-placeholder{color:#c7c7c7}:-moz-placeholder{color:#c7c7c7}input[disabled]{background-color:#eaeded;cursor:not-allowed}input[type="number"]{-moz-appearance:textfield}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type="checkbox"]{display:inline-block}html,body{font-family:FreeSans,Arimo,"Droid Sans",Helvetica,Arial,sans-serif;text-rendering:optimizespeed}a{transition:all 0.4s ease-in-out}.flex{display:flex;flex-wrap:nowrap;justify-content:center;align-items:center;align-content:center}img{max-width:100%;height:auto}
+.container-body{max-width:1800px;width:100%;margin:0 auto;padding:0px 30px 50px}.btn{width:100%;color:#7f7f7f;font-family:inherit;font-size:12px;font-weight:bold;text-transform:uppercase;text-decoration:none;text-align:center;letter-spacing:0.05em;padding:17px 20px;display:inline-block;cursor:pointer;outline:none;transition:all 0.4s ease-in-out}.btn:disabled{background-color:#eaeded;border-color:#cecece;cursor:not-allowed}.btn:disabled:hover{color:#fff;background-color:#eaeded;border-color:#cecece}.button-secondary{background-color:#fff;border:1px solid #b3b3b3}.button-secondary:hover{color:#fff;background-color:#006dc2;border:1px solid #006dc2}.button-error{color:#fff;background-color:#d92a36;border:1px solid #d92a36}.button-error:hover{color:#fff;background-color:#af242d;border:1px solid #af242d}.flash-container{padding:10px;font-size:14px}.flash-container.success{color:green;background-color:#bdeabd;border:1px solid green}.flash-container.error{background-color:#ffe9ec;color:#d92a36;border:1px solid #d92a36}.flash-container.warning{background-color:#fff3e9;color:orange;border:1px solid orange}.flash-container.message{background-color:#ebf6ff;color:#006dc2;border:1px solid #006dc2}
+
+.button-primary{color:#fff;background-color:#28a8b5;border:1px solid #28a8b5; width: 300px;}
+.button-primary:hover{color:#fff;background-color:#066d76;border:1px solid #066d76}
+#login-form{width:100%;max-width:300px;position:absolute;left:50%;top:50%;margin-left:-150px;margin-top:-200px;letter-spacing:normal}
+#login-form .login-fields input{margin:0 0 20px; width: 300px}
+.login-wrap{width:200px;left:50%;position:absolute;margin-left:-125px;top:50%;margin-top:-200px}
+
+#email, #password {
+    margin-top: 5px !important;
+    width: 292px !important;
+    height: 25px !important;
+} 

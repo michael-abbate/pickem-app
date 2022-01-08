@@ -1,0 +1,98 @@
+/* header CSS */
+.layout_title, .layout_title a{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    color: white;
+    font-size: 1.8vw; 
+    text-decoration: none;
+   
+}
+.header_container {
+    display: table;
+    background-color: #3f3f3f;
+    width: 100%;
+    align-items: center;
+    box-shadow: 0px 1.5px 4px 0px;
+}
+.header_container div {
+    display:table-cell;
+    vertical-align: middle;
+}
+
+.header_left_list {
+    float:left;
+    list-style-type: none;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    padding: 0 !important;
+    align-items: center;
+}
+/* end header CSS */
+
+
+li {
+    list-style-type: none;
+    padding:.2em;
+}
+.pickem-table .nested-pickem-table{
+    border-collapse:separate; 
+    border-spacing:.5em!important;
+    margin:0px;
+}
+
+
+.time-cell {
+    padding-right:.5em;
+    padding-left:2em;
+}
+
+.matchup-cell {
+    padding-right:.5em;
+    width: 5em;
+}
+
+#over-dropzone{
+    height:100px;
+    width:100px;
+}
+.pickem-cell {
+    padding:10px;
+    border:solid 2px dodgerblue;
+    background-color:white;
+    color:darkslategrey;
+    border-radius:5px;
+    text-align:center;
+    width: 6em;
+    height:1em;
+}
+.pickem-cell-label {
+    padding:10px;
+    display:block;
+    height:100%;
+    border:solid 2px dodgerblue;
+    background-color:white;
+    color:darkslategrey;
+    border-radius:5px;
+    text-align:center;
+}
+.drophere {
+    border:solid 2px dodgerblue;
+    background-color:white;
+    color:darkslategrey;
+    border-radius:5px;
+    text-align:center;
+    width: 5em;
+    height: 1em;
+}
+
+.pickem-cell:hover,.pickem-cell-label:hover  {
+    background-color: dodgerblue;
+    color:white;
+    cursor:pointer;
+
+}
+
+.dropzone{
+    float:right;
+}

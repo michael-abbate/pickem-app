@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migs' Pick'em</title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    Hello world!
+    <div class='dropzone'>
+        <ul>
+            <li>Favorite</li>
+                <td class='drophere'>DROP HERE</td>
+            <li>Underdog</li>
+            <li>Over</li>
+            <li>Under</li>
+            <li>Mortal Lock</li>
+        </ul>
+    </div>
+    <div>
+        <table class='pickem-table'>
+            <!-- {% for col in columns %}
+            <th>{{ col }}</th>
+            {% endfor %} -->
+            {% for day in unique_days %}
+                <td style='padding-top:1em;'>{{ day }}</td>
+                {% for row in records[records.date == day].to_dict(orient='records') %}
+                    <tr>
+                        {% for col,value in row.items() %}  
+                            {% if col == 'date' %}
+                                {{ pass }}
+                                <!-- <td><a href="{{ value }}" target="_blank">Report Link</a></td> -->
+                            {% elif col == 'time' %}
+                                <td class='time-cell'>{{ value }}</td>
+                            {% elif col == 'matchup' %}
+                                <td class='matchup-cell'>{{ value }}</td>
+                            {% else %}
+                                <td class = 'pickem-cell'>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% endfor %}            
+        </table>
+    </div>
+</body>
+</html>

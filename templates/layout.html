@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migs' Pick'em</title>
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/app.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/pickem.js') }}"></script>
+</head>
+<header>
+    <div class="header_container">
+        <div>
+            <ul class="header_left_list">
+                <li class='layout_title'><a href="/">Migs' Pick'em</a></li>
+            </ul>
+        </div>
+        
+    </div>
+</header>
+<body>
+    <center>
+        <!-- <br>
+        <br> -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+             {% for category, message in messages %}
+                <p class="flash-container {{ category }}">{{ message }}</p>
+             {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+    </center>
+    {% block heading %} {% endblock %}
+    {% block body %}
+    {% endblock %}
+    
+</body>
+</html>
