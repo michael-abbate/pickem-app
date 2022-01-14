@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    <center><h1 class = 'page_title'>Select your picks</h1></center>
+{% endblock %}
+
+{% block body %}
+<form method='post' id='pickem-form-2' name = "pickem-form-2" action="{{ url_for('success') }}">
+        {% for type_of_pick in type_of_picks_list %}
+        <div>
+            <select id="select-{{ type_of_pick }}" class = "select-for-type-of-pick">
+                <option name  = "{{ type_of_pick }}" value="">Select {{ type_of_pick }}</option>
+                {% for row in records %}
+                    {% if type_of_pick == 'over' %}
+                    <option name = "over" value = "{{ row['input-over'] }}">{{ row['render-over'] }}</option>
+                    {% elif type_of_pick == 'under' %}
+                    <option name = "under" value = "{{ row['input-under'] }}">{{ row['render-under'] }}</option>
+                    {% elif type_of_pick == 'favorite' %}
+                    <option name = "favorite" value = "{{ row['input-favorite'] }}">{{ row['render-favorite'] }}</option>
+                    {% elif type_of_pick == 'underdog' %}
+                    <option name = "underdog" value = "{{ row['input-underdog'] }}">{{ row['render-underdog'] }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        {% endfor %}
+    <input type='checkbox' value = "row['input-under']" name = 'under-test'>Test check</input>
+    <input type='submit' value="Submit picks"></input>
+</form>
+{{ df | safe }}
+
+{% endblock %}
