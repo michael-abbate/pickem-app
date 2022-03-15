@@ -36,4 +36,4 @@ function changeBackground(id) {
         label_elem.style.color="darkslategrey";
 
     }
-}
+};

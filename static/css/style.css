@@ -41,7 +41,6 @@ li {
     margin:0px;
 }
 
-
 .time-cell {
     padding-right:.5em;
     padding-left:2em;
@@ -70,6 +69,7 @@ li {
     padding:10px;
     display:block;
     height:100%;
+    width: 6em;
     border:solid 2px dodgerblue;
     background-color:white;
     color:darkslategrey;

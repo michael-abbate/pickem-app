@@ -25,10 +25,30 @@ else:
     app.debug = False
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
 
+# Date conversion functions
 def UnixToTimeEST(row):
     return datetime.datetime.utcfromtimestamp(int(row.start_time)/1000).replace(tzinfo=pytz.utc).astimezone(est).strftime("%-I:%M %p ET")
 def UnixToDateEST(row):
     return datetime.datetime.utcfromtimestamp(int(row.start_time)/1000).replace(tzinfo=pytz.utc).astimezone(est).strftime("%Y-%m-%d")
+
+# Value lookup functions
+def renderPick(row,lookupdf,type_of_pick):
+    gameid_pipe_value = row[f'input-{type_of_pick}']
+    game_id = gameid_pipe_value.split("|")[0]
+    value = gameid_pipe_value.split("|")[1]
+    matchup = lookupdf.loc[lookupdf['game_id']==int(game_id), 'matchup'].iloc[0]
+    favorite = lookupdf.loc[lookupdf['game_id']==int(game_id), 'fav_spread'].iloc[0]
+    underdog = lookupdf.loc[lookupdf['game_id']==int(game_id), 'dog_spread'].iloc[0]
+
+    if type_of_pick == 'over' or type_of_pick == 'under':
+        return matchup + f" {type_of_pick[0]}" + value
+    elif type_of_pick == 'favorite':
+        return favorite
+    elif type_of_pick == 'underdog':
+        return underdog
+    # else:
+    #     return 'test'
+        
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # db = SQLAlchemy(app)
@@ -80,13 +100,45 @@ def index():
                             unique_times = times,
                             records=df_picks,#.to_dict(orient='records'),
                             columns=df_picks.columns)
+
+@app.route('/select',methods = ['POST'])
+def select():
+    global df_picks
+    type_of_picks_list = ['input-over','input-under','input-favorite','input-underdog']
+    #TODO: Check for validity of selections (missing a type, )
+    if request.method == 'POST':
+        # flash(request.form)
+        # print(request.form)
+        gameids_and_picks = request.form.to_dict(flat=False)
+        # df_selectedpicks = pd.DataFrame(gameids_and_picks)
+        # for key,value in gameids_and_picks.items():
+        #     flash(key)
+        #     flash(value)
+
+        # return render_template('index.html',
+        #                     unique_days = days, 
+        #                     unique_times = times,
+        #                     records=df_picks,#.to_dict(orient='records'),
+        #                     columns=df_picks.columns)
+        # # df_selectedpicks['render-over'] = df_selectedpicks.apply(lambda row: df_picks.loc[df_picks['game_id']==df_selectedpicks['input-over'].split("|")[0], 'matchup'] + " " + df_selectedpicks['input-over'].split("|")[1]
+        # for type_of_pick in type_of_picks_list:
+        #     try:
+        #         df_selectedpicks[f'render-{type_of_pick}'] = df_selectedpicks.apply(lambda row: renderPick(row,df_picks,type_of_pick),axis=1)
+        #     except Exception as e:
+        #         flash("You're missing ")
+
+        # # in format of [{}]
+        # df_selectedpicks_dict = df_selectedpicks.to_dict(orient='records')
+        flash(gameids_and_picks)
+        return render_template('select.html', records = gameids_and_picks, df = gameids_and_picks, type_of_picks_list=type_of_picks_list)
+
 @app.route('/success',methods = ['POST'])
 def success():
     if request.method == 'POST':
         flash(request.form)
         print(request.form)
         return render_template('success.html')
-        # return redirect(url_for('success'))
+
 # @app.route('/submit', methods=['POST'])
 # def submit():
 #     if request.method == 'POST':
