@@ -104,22 +104,33 @@ def index():
 @app.route('/select',methods = ['POST'])
 def select():
     global df_picks
-    type_of_picks_list = ['over','under','favorite','underdog']
+    type_of_picks_list = ['input-over','input-under','input-favorite','input-underdog']
     #TODO: Check for validity of selections (missing a type, )
     if request.method == 'POST':
-        flash(request.form)
-        print(request.form)
+        # flash(request.form)
+        # print(request.form)
         gameids_and_picks = request.form.to_dict(flat=False)
-        df_selectedpicks = pd.DataFrame(gameids_and_picks)
-        # df_selectedpicks['render-over'] = df_selectedpicks.apply(lambda row: df_picks.loc[df_picks['game_id']==df_selectedpicks['input-over'].split("|")[0], 'matchup'] + " " + df_selectedpicks['input-over'].split("|")[1]
-        for type_of_pick in type_of_picks_list:
-            try:
-                df_selectedpicks[f'render-{type_of_pick}'] = df_selectedpicks.apply(lambda row: renderPick(row,df_picks,type_of_pick),axis=1)
-            except Exception as e:
-                flash("You're missing ")
+        # df_selectedpicks = pd.DataFrame(gameids_and_picks)
+        # for key,value in gameids_and_picks.items():
+        #     flash(key)
+        #     flash(value)
 
-        df_selectedpicks_dict = df_selectedpicks.to_dict(orient='records')
-        return render_template('select.html', records = df_selectedpicks_dict, df = df_selectedpicks.to_html(index=False), type_of_picks_list=type_of_picks_list)
+        # return render_template('index.html',
+        #                     unique_days = days, 
+        #                     unique_times = times,
+        #                     records=df_picks,#.to_dict(orient='records'),
+        #                     columns=df_picks.columns)
+        # # df_selectedpicks['render-over'] = df_selectedpicks.apply(lambda row: df_picks.loc[df_picks['game_id']==df_selectedpicks['input-over'].split("|")[0], 'matchup'] + " " + df_selectedpicks['input-over'].split("|")[1]
+        # for type_of_pick in type_of_picks_list:
+        #     try:
+        #         df_selectedpicks[f'render-{type_of_pick}'] = df_selectedpicks.apply(lambda row: renderPick(row,df_picks,type_of_pick),axis=1)
+        #     except Exception as e:
+        #         flash("You're missing ")
+
+        # # in format of [{}]
+        # df_selectedpicks_dict = df_selectedpicks.to_dict(orient='records')
+        flash(gameids_and_picks)
+        return render_template('select.html', records = gameids_and_picks, df = gameids_and_picks, type_of_picks_list=type_of_picks_list)
 
 @app.route('/success',methods = ['POST'])
 def success():

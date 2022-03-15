@@ -5,28 +5,29 @@
 {% endblock %}
 
 {% block body %}
-<form method='post' id='pickem-form-2' name = "pickem-form-2" action="{{ url_for('success') }}">
+<form method='post' id='pickem-form-2' name = "pickem-form-2" action="/success">
         {% for type_of_pick in type_of_picks_list %}
         <div>
-            <select id="select-{{ type_of_pick }}" class = "select-for-type-of-pick">
-                <option name  = "{{ type_of_pick }}" value="">Select {{ type_of_pick }}</option>
-                {% for row in records %}
-                    {% if type_of_pick == 'over' %}
-                    <option name = "over" value = "{{ row['input-over'] }}">{{ row['render-over'] }}</option>
-                    {% elif type_of_pick == 'under' %}
-                    <option name = "under" value = "{{ row['input-under'] }}">{{ row['render-under'] }}</option>
-                    {% elif type_of_pick == 'favorite' %}
-                    <option name = "favorite" value = "{{ row['input-favorite'] }}">{{ row['render-favorite'] }}</option>
-                    {% elif type_of_pick == 'underdog' %}
-                    <option name = "underdog" value = "{{ row['input-underdog'] }}">{{ row['render-underdog'] }}</option>
+            <select name = "select-{{ type_of_pick }}" class = "select-for-type-of-pick">
+                <option name  = "{{ type_of_pick }}" value="" disabled selected>Select {{ type_of_pick }}</option>
+                {% for row in records[type_of_pick] %}
+                    {% if type_of_pick == 'input-over' %}
+                    <option name = "over" value = "{{ row }}">{{ row }}</option>
+                    {% elif type_of_pick == 'input-under' %}
+                    <option name = "under" value = "{{ row }}">{{ row }}</option>
+                    {% elif type_of_pick == 'input-favorite' %}
+                    <option name = "favorite" value = "{{ row }}">{{ row }}</option>
+                    {% elif type_of_pick == 'input-underdog' %}
+                    <option name = "underdog" value = "{{ row }}">{{ row }}</option>
                     {% endif %}
                 {% endfor %}
+                <option name  = "test-name" value="test-value">test-value</option>
             </select>
         </div>
         {% endfor %}
-    <input type='checkbox' value = "row['input-under']" name = 'under-test'>Test check</input>
+    <input type='checkbox' value = "{{ records }}" name = 'under-test'>Test check</input>
     <input type='submit' value="Submit picks"></input>
 </form>
-{{ df | safe }}
+{{ df }}
 
 {% endblock %}
