@@ -14,7 +14,7 @@ fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 # token = 'NzczMjgzODBmNzVmMWE5ZjUyMzQxZjZjNDRjNmZiYTY6'
 # basic_auth_token = f'Basic {token}'
 # fanduel_email = 'abbatemich1@gmail.com'
-# fanduel_password = 'Yankees1'
+# fanduel_password = ''
 
 # fd = southpaw.Fanduel(fanduel_email, fanduel_password, basic_auth_token)
 # print(fd.get_upcoming())
